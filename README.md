@@ -1,25 +1,29 @@
-# Astro Starter Kit: Blog
+# アヒルのしっぽ
 
-```sh
-npm create astro@latest -- --template blog
-```
+アヒルのしっぽは、[PineDuck](https://pineduck.jp/)が不定期で更新しているブログです。
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- [アヒルのしっぽへ](https://duck-tail.pineduck.jp/)
 
-Features:
+## 技術仕様
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and Open Graph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
+- **ホスティング**: [Cloudflare Workers](https://www.cloudflare.com/products/workers/)
+- **フレームワーク**: [Astro](https://astro.build/)
+- **言語**: TypeScript, Astro, Markdown
+- **パッケージマネージャー**: npm
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## 構成
 
 ```text
+duck-tail/
+├── .github/
+│   ├── pull_request_template.md
+│   ├── workflows/ -> 後で追加します。
+│   │   ├── test.yml
+│   │   ├── deploy-preview.yml
+│   │   └── deploy-production.yml
+│   └── ISSUE_TEMPLATE/
+│       ├── fix.md
+│       └── feat.md
 ├── public/
 ├── src/
 │   ├── assets/
@@ -33,31 +37,69 @@ Inside of your Astro project, you'll see the following folders and files:
 └── tsconfig.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+### レイアウト
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- `AllArticleList`: 記事一覧ページのレイアウト
+- `AllCategoryList`: カテゴリー別記事一覧ページのレイアウト
+- `Article`: 記事ページのレイアウト
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+### カテゴリ
 
-Any static assets, like images, can be placed in the `public/` directory.
+- `pineduck`: PineDuckに関する記事
+- `development`: 開発に関する記事
+- `art`: 美術に関する記事
+- `cooking`: 料理に関する記事
+- `farm`: 農に関する記事
+- `poem`: その他の考え事などをまとめた記事
 
-## 🧞 Commands
+## セットアップ
 
-All commands are run from the root of the project, from a terminal:
+### 必須環境
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+- Node.js 22.12.0 以上
+- npm 10 以上
 
-## 👀 Want to learn more?
+### インストール
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+```bash
+git clone https://github.com/pineduckjp/duck-tail.git
+cd duck-tail
+npm install
+```
 
-## Credit
+## 開発ワークフロー
 
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+### ローカル開発
+
+```bash
+npm run dev
+```
+
+`http://localhost:4321` でサーバーが起動します。
+
+### ビルド・プレビュー
+
+```bash
+# 本番ビルド
+npm run build
+
+# デプロイ前確認
+npm run preview
+```
+
+## コマンド
+
+ルートディレクトリで、以下のコマンドを実行できます。
+
+| Command                   | Action                                        |
+| :------------------------ | :-------------------------------------------- |
+| `npm install`             | 依存関係をインストール                        |
+| `npm run dev`             | `localhost:4321`で開発サーバーを開始          |
+| `npm run build`           | ビルド結果を`./dist/`に出力                   |
+| `npm run preview`         | デプロイ前にビルド結果をプレビュー            |
+| `npm run astro ...`       | `astro add`, `astro check` を実行する時に使用 |
+| `npm run astro -- --help` | Astro CLI のヘルプを参照                      |
+
+## 貢献
+
+このプロジェクトへの貢献に興味がある場合は、[CONTRIBUTING.md](./CONTRIBUTING.md) を参照してください。
