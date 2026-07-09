@@ -1,0 +1,65 @@
+---
+import { localizedHTML as favicons } from "astro-favicons/middleware";
+
+import type { BreadcrumbTrail } from "@/types/breadcrumb.ts";
+
+import "@/styles/sprites-symbol.css";
+import "@/styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  index?: boolean | undefined;
+  canonicalUrl?: string | undefined;
+  breadcrumb?: BreadcrumbTrail;
+}
+
+const {
+  title,
+  description,
+  index = true,
+  canonicalUrl = undefined,
+  breadcrumb = undefined,
+} = Astro.props;
+
+const canonical = canonicalUrl
+  ? new URL(canonicalUrl)
+  : new URL(Astro.url.pathname, Astro.site);
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+{/* Global */}
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+{/* noindex, nofollow */}
+{!index && <meta name="robots" content="noindex, nofollow" />}
+
+{/* パンくずリストの構造化データをJSON-LD形式で出力 */}
+{
+  breadcrumb && (
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: breadcrumb.map((item, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: item.name,
+          item: item.url
+            ? new URL(item.url, Astro.site).href
+            : new URL(Astro.url.pathname, Astro.site).href,
+        })),
+      })}
+    />
+  )
+}
+
+{/* astro-favicons から生成されたアイコンとマニフェストタグのみ挿入 */}
+<Fragment set:html={favicons()} />

@@ -1,0 +1,154 @@
+/* Auto-generated from symbol.json */
+[data-sprite] {
+  display: inline-block;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  background-repeat: no-repeat;
+}
+
+[data-sprite="pineduck"] {
+  --sprite-original-w: 21px;
+  --sprite-original-h: 21px;
+  --sprite-bg-x: 0px;
+  --sprite-bg-y: 0px;
+  --sprite-sheet-w: 147px;
+  --sprite-sheet-h: 21px;
+  --sprite-w-final: var(--sprite-w, var(--sprite-original-w));
+  --sprite-h-final: var(--sprite-h, var(--sprite-original-h));
+  --sprite-scale-x: calc(var(--sprite-w-final) / var(--sprite-original-w));
+  --sprite-scale-y: calc(var(--sprite-h-final) / var(--sprite-original-h));
+
+  width: var(--sprite-w-final);
+  height: var(--sprite-h-final);
+  background-image: url("/sprites/symbol/symbol.webp");
+  background-position: calc(var(--sprite-bg-x) * var(--sprite-scale-x))
+    calc(var(--sprite-bg-y) * var(--sprite-scale-y));
+  background-size: calc(var(--sprite-sheet-w) * var(--sprite-scale-x))
+    calc(var(--sprite-sheet-h) * var(--sprite-scale-y));
+}
+
+[data-sprite="duck-tail"] {
+  --sprite-original-w: 21px;
+  --sprite-original-h: 21px;
+  --sprite-bg-x: -21px;
+  --sprite-bg-y: 0px;
+  --sprite-sheet-w: 147px;
+  --sprite-sheet-h: 21px;
+  --sprite-w-final: var(--sprite-w, var(--sprite-original-w));
+  --sprite-h-final: var(--sprite-h, var(--sprite-original-h));
+  --sprite-scale-x: calc(var(--sprite-w-final) / var(--sprite-original-w));
+  --sprite-scale-y: calc(var(--sprite-h-final) / var(--sprite-original-h));
+
+  width: var(--sprite-w-final);
+  height: var(--sprite-h-final);
+  background-image: url("/sprites/symbol/symbol.webp");
+  background-position: calc(var(--sprite-bg-x) * var(--sprite-scale-x))
+    calc(var(--sprite-bg-y) * var(--sprite-scale-y));
+  background-size: calc(var(--sprite-sheet-w) * var(--sprite-scale-x))
+    calc(var(--sprite-sheet-h) * var(--sprite-scale-y));
+}
+
+[data-sprite="menu"] {
+  --sprite-original-w: 21px;
+  --sprite-original-h: 21px;
+  --sprite-bg-x: -42px;
+  --sprite-bg-y: 0px;
+  --sprite-sheet-w: 147px;
+  --sprite-sheet-h: 21px;
+  --sprite-w-final: var(--sprite-w, var(--sprite-original-w));
+  --sprite-h-final: var(--sprite-h, var(--sprite-original-h));
+  --sprite-scale-x: calc(var(--sprite-w-final) / var(--sprite-original-w));
+  --sprite-scale-y: calc(var(--sprite-h-final) / var(--sprite-original-h));
+
+  width: var(--sprite-w-final);
+  height: var(--sprite-h-final);
+  background-image: url("/sprites/symbol/symbol.webp");
+  background-position: calc(var(--sprite-bg-x) * var(--sprite-scale-x))
+    calc(var(--sprite-bg-y) * var(--sprite-scale-y));
+  background-size: calc(var(--sprite-sheet-w) * var(--sprite-scale-x))
+    calc(var(--sprite-sheet-h) * var(--sprite-scale-y));
+}
+
+[data-sprite="down"] {
+  --sprite-original-w: 21px;
+  --sprite-original-h: 21px;
+  --sprite-bg-x: -63px;
+  --sprite-bg-y: 0px;
+  --sprite-sheet-w: 147px;
+  --sprite-sheet-h: 21px;
+  --sprite-w-final: var(--sprite-w, var(--sprite-original-w));
+  --sprite-h-final: var(--sprite-h, var(--sprite-original-h));
+  --sprite-scale-x: calc(var(--sprite-w-final) / var(--sprite-original-w));
+  --sprite-scale-y: calc(var(--sprite-h-final) / var(--sprite-original-h));
+
+  width: var(--sprite-w-final);
+  height: var(--sprite-h-final);
+  background-image: url("/sprites/symbol/symbol.webp");
+  background-position: calc(var(--sprite-bg-x) * var(--sprite-scale-x))
+    calc(var(--sprite-bg-y) * var(--sprite-scale-y));
+  background-size: calc(var(--sprite-sheet-w) * var(--sprite-scale-x))
+    calc(var(--sprite-sheet-h) * var(--sprite-scale-y));
+}
+
+[data-sprite="all"] {
+  --sprite-original-w: 21px;
+  --sprite-original-h: 21px;
+  --sprite-bg-x: -84px;
+  --sprite-bg-y: 0px;
+  --sprite-sheet-w: 147px;
+  --sprite-sheet-h: 21px;
+  --sprite-w-final: var(--sprite-w, var(--sprite-original-w));
+  --sprite-h-final: var(--sprite-h, var(--sprite-original-h));
+  --sprite-scale-x: calc(var(--sprite-w-final) / var(--sprite-original-w));
+  --sprite-scale-y: calc(var(--sprite-h-final) / var(--sprite-original-h));
+
+  width: var(--sprite-w-final);
+  height: var(--sprite-h-final);
+  background-image: url("/sprites/symbol/symbol.webp");
+  background-position: calc(var(--sprite-bg-x) * var(--sprite-scale-x))
+    calc(var(--sprite-bg-y) * var(--sprite-scale-y));
+  background-size: calc(var(--sprite-sheet-w) * var(--sprite-scale-x))
+    calc(var(--sprite-sheet-h) * var(--sprite-scale-y));
+}
+
+[data-sprite="category"] {
+  --sprite-original-w: 21px;
+  --sprite-original-h: 21px;
+  --sprite-bg-x: -105px;
+  --sprite-bg-y: 0px;
+  --sprite-sheet-w: 147px;
+  --sprite-sheet-h: 21px;
+  --sprite-w-final: var(--sprite-w, var(--sprite-original-w));
+  --sprite-h-final: var(--sprite-h, var(--sprite-original-h));
+  --sprite-scale-x: calc(var(--sprite-w-final) / var(--sprite-original-w));
+  --sprite-scale-y: calc(var(--sprite-h-final) / var(--sprite-original-h));
+
+  width: var(--sprite-w-final);
+  height: var(--sprite-h-final);
+  background-image: url("/sprites/symbol/symbol.webp");
+  background-position: calc(var(--sprite-bg-x) * var(--sprite-scale-x))
+    calc(var(--sprite-bg-y) * var(--sprite-scale-y));
+  background-size: calc(var(--sprite-sheet-w) * var(--sprite-scale-x))
+    calc(var(--sprite-sheet-h) * var(--sprite-scale-y));
+}
+
+[data-sprite="article"] {
+  --sprite-original-w: 21px;
+  --sprite-original-h: 21px;
+  --sprite-bg-x: -126px;
+  --sprite-bg-y: 0px;
+  --sprite-sheet-w: 147px;
+  --sprite-sheet-h: 21px;
+  --sprite-w-final: var(--sprite-w, var(--sprite-original-w));
+  --sprite-h-final: var(--sprite-h, var(--sprite-original-h));
+  --sprite-scale-x: calc(var(--sprite-w-final) / var(--sprite-original-w));
+  --sprite-scale-y: calc(var(--sprite-h-final) / var(--sprite-original-h));
+
+  width: var(--sprite-w-final);
+  height: var(--sprite-h-final);
+  background-image: url("/sprites/symbol/symbol.webp");
+  background-position: calc(var(--sprite-bg-x) * var(--sprite-scale-x))
+    calc(var(--sprite-bg-y) * var(--sprite-scale-y));
+  background-size: calc(var(--sprite-sheet-w) * var(--sprite-scale-x))
+    calc(var(--sprite-sheet-h) * var(--sprite-scale-y));
+}

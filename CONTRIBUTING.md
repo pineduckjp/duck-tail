@@ -35,8 +35,10 @@ Issue 作成時に、テンプレートを使用してください。
 
 1.  ブランチ作成: `<type>/issue-<issue-id>-<milestone-name>`
 2.  ブランチへ移動: git checkout `<branch-name>`
-3.  コード編集・コミット
-4.  push
+3.  コード編集: 時々 `npm run check:quick` を実行して、コードの整合性を確認
+4.  ローカルチェック: `npm run check`が通ることを確認
+5.  コミット
+6.  push
 
 コミットメッセージは、[Conventional Commits](https://www.conventionalcommits.org/ja/v1.0.0/) を参考にしてください。
 
@@ -69,7 +71,7 @@ refactor!: 記事ページのレイアウトを変更
 ### 3. develop ブランチへマージ
 
 1. PR 作成: `Issue #<issue-id>`を記載(Issue を作成していない場合は不要)
-2. 自動テスト実行(あれば)
+2. CIチェック: `npm run check` が通ることを確認
 3. レビュー・承認
 4. マージ
 5. Cloudflare Workers プレビュー自動デプロイ実行
