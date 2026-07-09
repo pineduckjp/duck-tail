@@ -26,11 +26,11 @@ Aseprite で作成したスプライトシートを CSS に変換して使用す
 ![Aseprite の例 - 3](./images/aseprite-example3.webp)
 
 - 出力設定
-  - 出力ファイル: `./public/sprites/symbol/*.webp`
+  - 出力ファイル: `/public/sprites/symbol/*.webp`
   - JSONデータ:
     - フォーマット: ハッシュマップ
     - タグ: ✔︎
-    - 出力ファイル: `./src/styles/sprites.json`
+    - 出力ファイル: `/public/sprites/symbol/*.json`
     - アイテムファイル名: `{title} #{tag} {frame}.{extension}`
     - タグ名: `{tag}`
 
@@ -44,15 +44,7 @@ Aseprite で作成したスプライトシートを CSS に変換して使用す
 npm run sprites
 ```
 
-`npm run build` でビルドする際に自動的に実行されます。
-
-開発サーバーを起動している場合は、以下のコマンドで監視モードにすることもできます。
-
-```bash
-npm run sprites:watch
-```
-
-`npm run dev`で開発サーバーを起動している場合は、`npm run sprites:watch`が含まれています。
+このコマンドは、`npm run dev`で開発サーバーを起動した際と、`npm run build` でビルドする際に自動的に実行されます。
 
 ## 3. スプライトシンボル を使用する
 
