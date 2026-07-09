@@ -1,35 +1,31 @@
 // @ts-check
 
-import mdx from '@astrojs/mdx';
-import sitemap from '@astrojs/sitemap';
-import { defineConfig, fontProviders } from 'astro/config';
+import sitemap from "@astrojs/sitemap";
+import { defineConfig } from "astro/config";
+
+import favicons from "astro-favicons";
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://example.com',
-	integrations: [mdx(), sitemap()],
-	fonts: [
-		{
-			provider: fontProviders.local(),
-			name: 'Atkinson',
-			cssVariable: '--font-atkinson',
-			fallbacks: ['sans-serif'],
-			options: {
-				variants: [
-					{
-						src: ['./src/assets/fonts/atkinson-regular.woff'],
-						weight: 400,
-						style: 'normal',
-						display: 'swap',
-					},
-					{
-						src: ['./src/assets/fonts/atkinson-bold.woff'],
-						weight: 700,
-						style: 'normal',
-						display: 'swap',
-					},
-				],
-			},
-		},
-	],
+  site: "https://duck-tail.pineduck.jp/",
+  devToolbar: {
+    enabled: false,
+  },
+  integrations: [
+    sitemap(),
+    favicons({
+      name: "アヒルのしっぽ",
+      short_name: "しっぽ",
+      background: "rgb(229 228 227)",
+      themes: ["rgb(229 228 227)"],
+      manifest: {
+        description: "不定期で更新しているPineDuckのブログです。",
+        id: "/",
+        start_url: "/",
+        scope: "/",
+        display: "standalone",
+        display_override: ["standalone", "browser"],
+      },
+    }),
+  ],
 });
