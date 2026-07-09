@@ -1,20 +1,32 @@
-import { defineCollection } from 'astro:content';
-import { glob } from 'astro/loaders';
-import { z } from 'astro/zod';
+import { defineCollection, reference } from "astro:content";
+import { glob, file } from "astro/loaders";
+import { z } from "astro/zod";
+import { string } from "astro:schema";
 
-const blog = defineCollection({
-	// Load Markdown and MDX files in the `src/content/blog/` directory.
-	loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
-	// Type-check frontmatter using a schema
-	schema: ({ image }) =>
-		z.object({
-			title: z.string(),
-			description: z.string(),
-			// Transform string to Date object
-			pubDate: z.coerce.date(),
-			updatedDate: z.coerce.date().optional(),
-			heroImage: z.optional(image()),
-		}),
+const tail = defineCollection({
+  loader: glob({ base: "./src/content", pattern: "**/*.md" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    heroImage: string(),
+    category: reference("categories").default({
+      collection: "categories",
+      id: "poem",
+    }),
+    canonicalUrl: z.string().optional(),
+    published: z.boolean().default(true),
+  }),
 });
 
-export const collections = { blog };
+const categories = defineCollection({
+  loader: file("src/content/categories/categories.yaml"),
+  schema: z.object({
+    order: z.number().int().positive(),
+    name: z.string(),
+    description: z.string().optional(),
+  }),
+});
+
+export const collections = { tail, categories };

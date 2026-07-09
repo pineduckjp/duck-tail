@@ -1,0 +1,49 @@
+<button id="scroll-down" type="button" aria-label="最下部へ移動">
+  <span data-sprite="down"></span>
+</button>
+
+<style>
+  #scroll-down {
+    position: fixed;
+    right: calc((100vw - min(600px, 100vw)) / 2 + 10px);
+    bottom: calc(52px + env(safe-area-inset-bottom));
+    z-index: 2;
+    padding: 1px;
+    color: var(--dark);
+    cursor: pointer;
+    background: color-mix(in srgb, var(--base) 60%, transparent);
+    border: solid 1.5px var(--dark);
+    box-shadow: 3px 4px 0 var(--dark);
+  }
+
+  #scroll-down [data-sprite] {
+    display: block;
+  }
+</style>
+
+<script>
+  const mainElement = document.querySelector("main") as HTMLElement;
+  const scrollDownButton = document.getElementById(
+    "scroll-down",
+  ) as HTMLButtonElement;
+
+  // scrollDownButtonをクリックしたら、 main要素の最下部までスクロールする
+  function scrollToBottom() {
+    mainElement.scrollTo({
+      top: mainElement.scrollHeight,
+      behavior: "smooth",
+    });
+  }
+  scrollDownButton.addEventListener("click", scrollToBottom);
+
+  // main要素のスクロール位置が最下部+10px~最下部に達したら、 scrollDownButtonを非表示にする
+  function handleScroll() {
+    const isAtBottom =
+      mainElement.scrollHeight - mainElement.scrollTop <=
+      mainElement.clientHeight + 10;
+    scrollDownButton.style.display = isAtBottom ? "none" : "block";
+  }
+  mainElement.addEventListener("scroll", handleScroll);
+  window.addEventListener("DOMContentLoaded", handleScroll);
+  window.addEventListener("resize", handleScroll);
+</script>
