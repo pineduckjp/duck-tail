@@ -5,7 +5,7 @@
 - id: development
   order: 2
   name: "開発"
-  description: "ソフトウェア開発に関する記事をまとめたカテゴリです。"
+  description: "開発に関する記事をまとめたカテゴリです。"
 - id: art
   order: 3
   name: "アート"
@@ -17,8 +17,8 @@
 - id: farm
   order: 5
   name: "ファーム"
-  description: "農に関する記事をまとめたカテゴリです。"
+  description: "農作業に関する記事をまとめたカテゴリです。"
 - id: poem
   order: 6
   name: "ポエム"
-  description: "詩に関する記事をまとめたカテゴリです。"
+  description: "考え事などをまとめたカテゴリです。"

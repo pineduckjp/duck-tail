@@ -22,7 +22,7 @@ footer {
   background: var(--middle);
 }
 
-.footer-button:disabled {
+.footer-button.disabled {
   color: var(--shadow);
   pointer-events: none;
   background: var(--middle);

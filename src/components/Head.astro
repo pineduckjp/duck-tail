@@ -9,17 +9,17 @@ import "@/styles/global.css";
 interface Props {
   title: string;
   description: string;
-  index?: boolean | undefined;
-  canonicalUrl?: string | undefined;
+  index?: boolean;
+  canonicalUrl?: string;
   breadcrumb?: BreadcrumbTrail;
 }
 
 const {
   title,
   description,
-  index = true,
-  canonicalUrl = undefined,
-  breadcrumb = undefined,
+  index = false,
+  canonicalUrl,
+  breadcrumb,
 } = Astro.props;
 
 const canonical = canonicalUrl

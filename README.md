@@ -18,23 +18,64 @@ duck-tail/
 ├── .github/
 │   ├── pull_request_template.md
 │   ├── workflows/ -> 後で追加します。
-│   │   ├── test.yml
-│   │   ├── deploy-preview.yml
-│   │   └── deploy-production.yml
+│   │   ├── test.yml -> 後で追加します。
+│   │   ├── deploy-preview.yml -> 後で追加します。
+│   │   └── deploy-production.yml -> 後で追加します。
 │   └── ISSUE_TEMPLATE/
 │       ├── fix.md
 │       └── feat.md
+├── docs/
+|   ├── images/
+|   │   └── *.webp
+|   └── sprites.md
 ├── public/
+|   ├── .assetsignore -> 後で追加します。
+|   ├── favicon.svg
+|   ├── fonts/
+|   │   └── *.woff2
+|   ├── icons/
+|   │   └── *.webp
+|   ├── images/
+|   │   └── *.webp
+|   └── sprites/
+|       └── symbol/
+|           ├── *.json
+|           └── *.webp
+├── scripts/
+|   └── aseprite-to-css.ts
 ├── src/
-│   ├── assets/
 │   ├── components/
 │   ├── content/
 │   ├── layouts/
-│   └── pages/
+│   │   ├── AllArticleListLayout.astro
+│   │   ├── CategoryArticleListLayout.astro
+│   │   └── ArticleLayout.astro -> 後で追加します。
+│   ├── lib/
+│   │   └── tail.ts
+│   ├── pages/
+│   │   ├── [category]/
+│   │   │   └── [...page].astro
+│   │   ├── index.astro
+│   │   └── rss.xml.js
+│   ├── styles/
+│   │   ├── all-article-list.css
+|   |   ├── article.css -> 後で追加します。
+│   │   ├── category-article-list.css
+│   │   ├── footer.css
+│   │   ├── global.css
+│   │   └── sprites-symbols.css
+│   └── types/
+│       └── breadcrumb.ts
+├── .gitignore
+├── .prettierrc.mjs
+├── eslint.config.mjs
+├── stylelint.config.mjs
 ├── astro.config.mjs
 ├── README.md
+├── CONTRIBUTING.md
 ├── package.json
-└── tsconfig.json
+├── tsconfig.json
+└── wrangler.jsonc -> 後で追加します。
 ```
 
 ### レイアウト
