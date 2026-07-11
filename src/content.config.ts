@@ -6,6 +6,14 @@ import { string } from "astro:schema";
 const tail = defineCollection({
   loader: glob({ base: "./src/content", pattern: "**/*.md" }),
   schema: z.object({
+    slug: z
+      .string()
+      .trim()
+      .min(1, { message: "Slug is required." })
+      .regex(/^(?!-)(?!.*--)(?!.*-$)[a-z0-9-]+$/, {
+        message:
+          "Slug must be lowercase and can only contain letters, numbers, and single hyphens (no leading/trailing hyphen).",
+      }),
     title: z.string(),
     description: z.string(),
     pubDate: z.coerce.date(),
