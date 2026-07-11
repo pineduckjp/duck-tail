@@ -1,6 +1,4 @@
 ---
-import { getCollection } from "astro:content";
-
 import type { BreadcrumbTrail } from "@/types/breadcrumb.ts";
 
 import Head from "@/components/Head.astro";
@@ -13,30 +11,12 @@ import "@/styles/all-article-list.css";
 interface Props {
   title: string;
   description: string;
-  index?: boolean | undefined;
-  footerPrev?: string | undefined;
+  index?: boolean;
+  prevUrl: string;
   breadcrumb?: BreadcrumbTrail;
 }
 
-const {
-  title,
-  description,
-  index = true,
-  footerPrev = "https://pineduck.jp/duck-tail/",
-  breadcrumb = undefined,
-} = Astro.props;
-
-const allArticles = (await getCollection("tail"))
-  .filter((article) => article.data.published)
-  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
-
-const usedCategoryIds = new Set(
-  allArticles.map((article) => article.data.category.id),
-);
-
-const allCategories = (await getCollection("categories"))
-  .filter((category) => usedCategoryIds.has(category.id))
-  .sort((a, b) => a.data.order - b.data.order);
+const { title, description, index, prevUrl, breadcrumb } = Astro.props;
 ---
 
 <!doctype html>
@@ -53,33 +33,9 @@ const allCategories = (await getCollection("categories"))
   <body ontouchstart="">
     <Header />
     <main>
-      {
-        allCategories.map((category) => (
-          <section>
-            <a>
-              <h2>
-                <span class="category-name">{category.data.name}</span>
-              </h2>
-            </a>
-            <ul>
-              {allArticles
-                .filter((article) => article.data.category.id === category.id)
-                .map((article) => (
-                  <li>
-                    <a>
-                      <img
-                        src={article.data.heroImage}
-                        alt={article.data.title}
-                      />
-                    </a>
-                  </li>
-                ))}
-            </ul>
-          </section>
-        ))
-      }
+      <slot />
       <ScrollDown />
     </main>
-    <Footer prevUrl={footerPrev} breadcrumb={breadcrumb} />
+    <Footer prevUrl={prevUrl} breadcrumb={breadcrumb} />
   </body>
 </html>
