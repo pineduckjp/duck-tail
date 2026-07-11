@@ -3,12 +3,13 @@ import type { BreadcrumbTrail } from "@/types/breadcrumb.ts";
 
 import "@/styles/footer.css";
 
-interface Props {
+export interface Props {
   prevUrl: string;
+  nextUrl?: string;
   breadcrumb?: BreadcrumbTrail;
 }
 
-const { prevUrl, breadcrumb = undefined } = Astro.props;
+const { prevUrl, nextUrl, breadcrumb } = Astro.props;
 ---
 
 <footer>
@@ -20,7 +21,11 @@ const { prevUrl, breadcrumb = undefined } = Astro.props;
   <button id="close-menu" class="footer-button" aria-label="メニューを閉じる">
     × 閉じる
   </button>
-  <button id="next" class="footer-button" disabled>進む &gt;&gt;</button>
+  <a
+    id="next"
+    class={nextUrl ? "footer-button" : "footer-button disabled"}
+    href={nextUrl ? nextUrl : ""}>&gt;&gt; 進む</a
+  >
 </footer>
 
 <div id="menu-popup">

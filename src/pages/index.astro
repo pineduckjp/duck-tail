@@ -1,7 +1,18 @@
 ---
 import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts.ts";
 
+import {
+  getAllArticles,
+  getAllCategories,
+  getTailArticlePath,
+} from "@/lib/tail.ts";
+
 import Layout from "@/layouts/AllArticleListLayout.astro";
+
+const allArticles = await getAllArticles();
+const allCategories = await getAllCategories(allArticles);
+
+const maxArticlesPerCategory = 10; // 最大表示件数
 ---
 
 <Layout
@@ -15,6 +26,31 @@ import Layout from "@/layouts/AllArticleListLayout.astro";
       symbol: "duck-tail",
       url: "https://pineduck.jp/duck-tail/",
     },
-    { name: "全ての記事", symbol: "all" },
+    { name: "すべての記事", symbol: "all" },
   ]}
-/>
+  prevUrl="https://pineduck.jp/duck-tail/"
+>
+  {
+    allCategories.map((category) => (
+      <section>
+        <a class="category-link" href={`/${category.id}/`}>
+          <h2>
+            <span class="category-name">{category.data.name}</span>
+          </h2>
+        </a>
+        <ul>
+          {allArticles
+            .filter((article) => article.data.category.id === category.id)
+            .slice(0, maxArticlesPerCategory)
+            .map((article) => (
+              <li>
+                <a href={getTailArticlePath(article)}>
+                  <img src={article.data.heroImage} alt={article.data.title} />
+                </a>
+              </li>
+            ))}
+        </ul>
+      </section>
+    ))
+  }
+</Layout>
