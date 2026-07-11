@@ -1,0 +1,93 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+
+import {
+  getAllArticles,
+  getAllCategories,
+  getTailArticlePath,
+} from "@/lib/tail.ts";
+
+import { SITE_TITLE } from "@/consts.ts";
+import Layout from "@/layouts/CategoryArticleListLayout.astro";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const allArticles = await getAllArticles();
+  const allCategories = await getAllCategories(allArticles);
+
+  return allCategories.flatMap((categoryList) => {
+    const categoryId = categoryList.id;
+
+    const categoryArticles = allArticles.filter(
+      (article) => article.data.category.id === categoryId,
+    );
+    if (categoryArticles.length === 0) return [];
+
+    return paginate(categoryArticles, {
+      pageSize: 20, // 最大表示件数
+      params: { category: categoryId },
+      props: {
+        category: {
+          id: categoryList.id,
+          name: categoryList.data.name,
+          description: categoryList.data.description ?? "",
+        },
+      },
+    });
+  });
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { page, category }: Props = Astro.props;
+
+const currentPage = page.currentPage;
+const lastPage = page.lastPage;
+
+const pageNumber = page.url.prev ? ` - ${currentPage}` : "";
+const pageTitle = `${category.name}の記事${pageNumber} | ${SITE_TITLE}`;
+const pageDescription = `${category.name}の記事 - ${currentPage}ページ目。`;
+
+const prevPageNum = currentPage > 2 ? String(currentPage - 1) : "";
+const nextPageNum = currentPage < lastPage ? String(currentPage + 1) : "";
+const prevUrl = page.url.prev ? `/${category.id}/${prevPageNum}` : "/";
+const nextUrl = page.url.next ? `/${category.id}/${nextPageNum}` : undefined;
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  breadcrumb={[
+    { name: "PineDuck", symbol: "pineduck", url: "https://pineduck.jp/" },
+    {
+      name: "アヒルのしっぽ",
+      symbol: "duck-tail",
+      url: "https://pineduck.jp/duck-tail/",
+    },
+    {
+      name: "すべての記事",
+      symbol: "all",
+      url: "https://duck-tail.pineduck.jp/",
+    },
+    { name: category.name + "の記事", symbol: "category" },
+  ]}
+  prevUrl={prevUrl}
+  nextUrl={nextUrl}
+>
+  <h2>{category.name}の記事{page.url.prev ? ` - ${currentPage}` : ""}</h2>
+  <p>{category.description}</p>
+  <ul class="article-container">
+    {
+      page.data.map((article) => (
+        <li class="article-item">
+          <a class="article-link" href={getTailArticlePath(article)}>
+            <img
+              src={article.data.heroImage}
+              alt={article.data.title}
+              class="article-hero-image"
+            />
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>
