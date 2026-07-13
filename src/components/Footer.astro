@@ -129,7 +129,7 @@ const { prevUrl, nextUrl, breadcrumb } = Astro.props;
   }
 
   // 同一オリジンのURLのみ許可
-  function normalizeSameOriginUrl(raw: string | undefined): string | null {
+  function getSafeNavigationUrl(raw: string | undefined): string | null {
     if (!raw) return null;
 
     try {
@@ -139,11 +139,21 @@ const { prevUrl, nextUrl, breadcrumb } = Astro.props;
       // http/https 以外は拒否
       if (url.protocol !== "http:" && url.protocol !== "https:") return null;
 
-      // 同一オリジンのみ許可
-      if (url.origin !== window.location.origin) return null;
+      // 同一オリジンは相対化して返す
+      if (url.origin === window.location.origin) {
+        return `${url.pathname}${url.search}${url.hash}`;
+      }
 
-      // 同一オリジンなので path+query+hash で返す
-      return `${url.pathname}${url.search}${url.hash}`;
+      // pineduck.jp とそのサブドメインを許可
+      if (
+        url.hostname === "pineduck.jp" ||
+        url.hostname.endsWith(".pineduck.jp")
+      ) {
+        // 許可済みの別サブドメインは絶対URLのまま返す
+        return url.toString();
+      }
+
+      return null;
     } catch {
       return null;
     }
@@ -155,7 +165,7 @@ const { prevUrl, nextUrl, breadcrumb } = Astro.props;
   function goPrev() {
     const urlParams = new URLSearchParams(window.location.search);
     const prevUrl = urlParams.get("prev") || prevButton.dataset.url;
-    const safePrevUrl = normalizeSameOriginUrl(prevUrl);
+    const safePrevUrl = getSafeNavigationUrl(prevUrl);
     if (safePrevUrl) {
       window.location.href = safePrevUrl;
     }
@@ -167,7 +177,7 @@ const { prevUrl, nextUrl, breadcrumb } = Astro.props;
   function goNext() {
     const urlParams = new URLSearchParams(window.location.search);
     const nextUrl = urlParams.get("next") || nextButton.dataset.url;
-    const safeNextUrl = normalizeSameOriginUrl(nextUrl);
+    const safeNextUrl = getSafeNavigationUrl(nextUrl);
     if (safeNextUrl) {
       window.location.href = safeNextUrl;
     }
