@@ -11,6 +11,15 @@ export default defineConfig({
   devToolbar: {
     enabled: false,
   },
+  markdown: {
+    syntaxHighlight: {
+      type: "shiki",
+      excludeLangs: ["math"],
+    },
+    shikiConfig: {
+      theme: "github-light",
+    },
+  },
   integrations: [
     sitemap(),
     favicons({

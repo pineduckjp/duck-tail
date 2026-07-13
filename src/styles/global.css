@@ -20,17 +20,6 @@
   padding: 0;
   margin: 0;
   scroll-behavior: auto;
-}
-
-p,
-h1,
-h2,
-h3,
-a,
-li,
-span,
-code,
-button {
   font-family: "JF-Dot-Shinonome-16-Subset", sans-serif;
   font-size: 17px;
   font-weight: normal;
