@@ -1,0 +1,204 @@
+---
+slug: pineduck-art-mvp
+title: アプリで完結する「絵画教室」アプリのMVPを開発した話
+description: 「絵画教室」アプリPineDuckアートのMVPを開発した話と、今後の展望についてご紹介します。
+pubDate: 2026-06-21
+category: development
+heroImage: /images/development/pineduck-art-mvp/hero.webp
+---
+
+アプリで完結する絵画教室アプリ「PineDuckアート」のMVPを開発した話と、今後の展望についてご紹介します。
+
+## ゲームのように楽しく学べる絵画教室アプリを目指して
+
+私はもともと美術大学で絵画を専攻していました。美大に行くには、デッサンなどの実技試験がつきもの。試験を突破するために、多くの学生は、画塾などと呼ばれる美術予備校に通います。私も例外ではなく、試験対策のために画塾へ通っていました。ただ、この画塾、色々と問題があります。
+
+- 高い（オンラインでも授業料だけで毎月3万越え+設備代など）
+- 場所が限られている（都市部に集中している）
+- オンラインだとzoomなどのビデオ会議ツールを使うことが多いが、良いインターネット環境が必要
+- 画塾の先生の質がピンキリで、当たり外れが大きい
+- 教科書のような、あとで読み返せる教材がない
+- とにかく高い
+
+<img src="/images/development/pineduck-art-mvp/sweat-duck.webp" alt="冷や汗をかくアヒル" width="200" loading="lazy" />
+
+かといって、独学でやると添削してくれる人がいないので、なかなか上達しません。そこで、絵画教室アプリを作れば、これらの問題を解決できるのではないかと思いました。
+
+PineDuckアートでは、「[Duolingo](https://www.duolingo.com/)」や「[Brilliant](https://brilliant.org/)」のような、ゲーム感覚で絵画の基本を学べるプラットフォームを目指しています。
+
+- アプリで完結
+- 時間や場所に縛られない
+- 低価格で学べる
+- 何度でも見返せる
+- ゲームのように楽しく気軽に学べる
+- チャットで添削や質問ができる
+
+将来的には、様々なコースを提供したいですが、まずは「鉛筆デッサン(静物)コース」からスタートします。
+
+## MVPをお試し
+
+実際に開発したMVPをお試しいただけます。
+
+- 講座0と1のみ受講可能
+- 日付はダミーなので、実際の講座日程とは異なります
+- 画面は出ますが、実際に課金されることはありません
+
+### Web版
+
+URLにアクセスするだけで、ブラウザ上でアプリを体験できます。課金機能にはStripeのサンドボックスを使用しています。カード番号は、[テストカード番号](https://stripe.com/docs/testing#cards)をご利用ください。
+
+> <a href="https://art.pineduck.jp/" target="_blank" rel="noopener noreferrer">Webアプリページへ ></a>
+
+### iOS版
+
+TestFlightからアプリがダウンロードできます。TestFlightのアプリをインストールしてから、下記のリンクにアクセスしてください。
+
+> [TestFlightからダウンロード >](https://testflight.apple.com/join/KFfraUxP)
+
+### Android版
+
+Android版は実際の課金を避けるため、まずこちらのメールフォームで、メールアドレスを登録していただく必要があります。メールフォームに登録したメールアドレス宛に、MVPのダウンロードリンクをお送りします。1〜2日程度でメールを送信いたしますので、しばらくお待ちください。
+
+> [MVP申請メールフォームヘ >](https://pineduck.jp/art/mvp-request/)
+
+## 着実にステップアップできる機能を詰め込みました
+
+いくら「ゲームのように楽しく」とはいえ、デッサンの基本がしっかり学べて、着実にステップアップできる内容を提供する必要があります。そのために、講座の内容を充実させることはもちろん、個別の質問や添削に対応するためのチャット機能など、さまざまな機能を実装しています。
+
+### 講座
+
+講座は0〜45までの全46回で構成されていて、各講座は前回の内容を踏まえて段階的に難易度が上がっていきます。講座0と1はMVPで体験できます。
+
+<img src="/images/development/pineduck-art-mvp/class-list.webp" alt="鉛筆デッサン(静物)コースの講座リスト画面" width="300" loading="lazy" class="border" />
+
+各講座を開くと、講座の概要画面が表示されます。講座の目次や、講座でつかうものが確認できます。
+
+<img src="/images/development/pineduck-art-mvp/class-outline.webp" alt="鉛筆デッサン(静物)コースの講座概要画面" width="300" loading="lazy" class="border" />
+
+講座本編は、「講義」と「実践」パートがあります。講義では、デッサンの基本的な知識や技術を学びます。画面上のプログレスバーで、今どの段階にいるのかが分かるようになっています。プログレスバーをタップすると目次が表示され、好きなセクションへジャンプできます。
+
+<img src="/images/development/pineduck-art-mvp/class-lecture.webp" alt="鉛筆デッサン(静物)コースの講座プログレスバー画面" width="300" loading="lazy" class="border" />
+
+「すすむ」「もどる」ボタンで、講義の内容を順番に進めたり戻ったりできます。
+
+実践では、講義で学んだ内容を実際に描いてみる課題が出されます。ある程度「講義」パートを進めると、写真をアップロードして画像を提出する「実践」パートになります。制作過程を段階的にアップロードすることで、あとで見返したときに、どこに問題があったのか分かりやすいですし、講師も的確なアドバイスをしやすくなります。
+
+<img src="/images/development/pineduck-art-mvp/class-practice.webp" alt="鉛筆デッサン(静物)コースの講座実践画面" width="300" loading="lazy" class="border" />
+
+さらに各講座には、チャットとギャラリー画面があります。
+
+チャット画面は、ユーザーが操作に迷わないように、LINEなどの既存のメッセージアプリのUIを参考にしています。チャットでは、講師に質問したり、作品の添削を依頼できます。チャットは、講座ごとにわけ、どの講座の質問なのかが分かりやすく、あとで振り返りやすくなるようにしました。
+
+<img src="/images/development/pineduck-art-mvp/chat.webp" alt="鉛筆デッサン(静物)コースのチャット画面" width="300" loading="lazy" class="border" />
+
+添削機能はメンタープランのユーザーのみ利用可能です。メンタープラン解約後は過去のチャット履歴のみ閲覧することが可能になります。チャットでは、テキストだけでなく、画像も送信できます。
+
+<img src="/images/development/pineduck-art-mvp/chat-archived.webp" alt="鉛筆デッサン(静物)コースのアーカイブされたチャット画面" width="300" loading="lazy" class="border" />
+
+ギャラリー画面では、他のユーザーの作品を閲覧したり、他のユーザーの作品と自分の作品を比較したりできます。
+
+<img src="/images/development/pineduck-art-mvp/gallery.webp" alt="鉛筆デッサン(静物)コースのギャラリー画面" width="300" loading="lazy" class="border" />
+
+画像を拡大することも可能です。
+
+<img src="/images/development/pineduck-art-mvp/gallery-zoom.webp" alt="鉛筆デッサン(静物)コースのギャラリー拡大画面" width="300" loading="lazy" class="border" />
+
+ギャラリーに掲載する作品は、提出画面で「ギャラリーで公開する」にチェックを入れることで、他のユーザーに公開されます。自分の作品を公開することで、他のユーザーの作品と比較して、自分の作品の良いところや改善点を見つけることができます。公開するのが嫌な人は、チェックを外すことで、ギャラリーの掲載を回避することもできます。
+
+<img src="/images/development/pineduck-art-mvp/gallery-check.webp" alt="鉛筆デッサン(静物)コースのギャラリー公開確認画面" width="300" loading="lazy" class="border" />
+
+### 購入
+
+PineDuckアートには、3つのプランがあります。
+
+<img src="/images/development/pineduck-art-mvp/plan-list.webp" alt="鉛筆デッサン(静物)コースのプランリスト画面" width="600" loading="lazy" class="border" />
+
+- 無料プラン (講座0と1の受講、ギャラリーの閲覧)
+- ベーシックプラン (全講座の受講、作品の提出、進捗同期)
+- メンタープラン (チャットによる添削や質問)
+
+どれも月額サブスクリプションですが、メンタープランには10人の定員制限を設けたかったので、そのための実装に苦労しました。そのことは別の記事に書きたいと思います。
+
+RevenueCatを使って、Web、iOS、Androidのすべてのプラットフォームで、同じコードベースで課金機能を実装しています。課金の状態はSupabaseのテーブルに保存しているので、どのデバイスからでも進捗を確認できます。
+
+Web版では、RevenueCat Web Billing (内部でStripeを使用している) を使用して、Stripeのサンドボックス環境で課金機能を実装しています。
+
+<img src="/images/development/pineduck-art-mvp/web-purchase.webp" alt="鉛筆デッサン(静物)コースのWeb購入画面" width="600" loading="lazy" class="border" />
+
+iOS版では、in-app purchaseを使用して、課金機能を実装しています。
+
+<img src="/images/development/pineduck-art-mvp/ios-purchase.webp" alt="鉛筆デッサン(静物)コースのiOS購入画面" width="300" loading="lazy" class="border" />
+
+Androidでも、in-app purchaseを使用して、課金機能を実装しています。
+
+<img src="/images/development/pineduck-art-mvp/android-purchase.webp" alt="鉛筆デッサン(静物)コースのAndroid購入画面" width="300" loading="lazy" class="border" />
+
+### 設定
+
+設定画面では、アカウント情報の確認や、プランの変更、認証などができます。アカウント情報はSupabase Authを使用して管理しています。
+
+<img src="/images/development/pineduck-art-mvp/setting.webp" alt="鉛筆デッサン(静物)コースの設定画面" width="300" loading="lazy" class="border" />
+
+アカウントの認証は、MVPではOTP認証にしましたが、正式リリース時には、パスワード+OTPの二要素認証にする予定です。OTP認証では`メールアドレス送信→メールに記載されたコードを入力`という流れになっています。メールの送信にはResendを使用しています。
+
+<img src="/images/development/pineduck-art-mvp/auth-otp.webp" alt="鉛筆デッサン(静物)コースのOTP認証画面" width="300" loading="lazy" class="border" />
+
+初回ログイン時は`コード認証成功→ユーザー名入力→アバター入力→設定画面に戻る`という流れで、ユーザー名とアバターはあとで変更可能です。2回目以降の認証時は`コード認証成功→設定画面に戻る`という流れになります。
+
+<img src="/images/development/pineduck-art-mvp/auth-avatar.webp" alt="鉛筆デッサン(静物)コースのアバター編集画面" width="300" loading="lazy" class="border" />
+
+### 先生モード
+
+先生用のメールアドレスでログインすると、先生モードになります。先生モードには、メンタープランのユーザーのリストが表示され、それぞれのユーザーのチャットと提出物を確認できるようになっています。
+
+<img src="/images/development/pineduck-art-mvp/user-list.webp" alt="鉛筆デッサン(静物)コースのユーザーリスト画面" width="300" loading="lazy" class="border" />
+
+チャット画面では、ユーザーからの質問や添削をテキストと画像送信でできます。先生モードのチャットでは、アバターの表情を選択できるようになっていて、返信の内容に合わせて、表情を選ぶことができます。 (ユーザー側のチャット画面にはありません。)
+
+<img src="/images/development/pineduck-art-mvp/teacher-chat.webp" alt="鉛筆デッサン(静物)コースの先生モードのチャット画面" width="300" loading="lazy" class="border" />
+
+提出物画面は、提出物の内容を確認したり、まとめてダウンロードしたりできるようになっています。
+
+<img src="/images/development/pineduck-art-mvp/submit-download.webp" alt="鉛筆デッサン(静物)コースの提出物ダウンロード画面" width="300" loading="lazy" class="border" />
+
+### 技術スタック
+
+- フロントエンド: React Native Expo (Web, iOS, Android対応)
+- バックエンド: Supabase Edge Functions
+- 認証: Supabase Auth (OTP認証) + Resend (メール送信)
+- 課金: RevenueCat (Web, iOS, Android対応)
+- アセット：Supabase Storage (画像や講座内容のJSONデータを保存)
+
+<img src="/images/development/pineduck-art-mvp/app-icon.webp" alt="アプリアイコン" width="200" loading="lazy" />
+
+## リリースまでに、もっと楽しいアプリにしたい
+
+このMVPを作成したことで、基本的な機能は一通り実装できましたが、まだまだ改善の余地があります。地道に改善を重ね、今年中の正式リリースを目指していきます。
+
+### フロント部分の改善
+
+- UI/UXの改善 (テキストサイズの調整、アニメーションを増やしてゲーム感UP、講座の内容をもっと見やすくするなど)
+- アセット読み込み速度の改善 (プリロード、キャッシュの最適化、ドット絵のスプライトシート化など)
+- 各デバイスでの表示崩れの修正 (ノッチで隠れる、テキストがはみ出るなど)
+- 講座の内容の充実とストック (講座0と1以外の講座も順次追加していく)
+- チャット機能の改善 (UI/UXの改善など)
+- 通知機能の追加 (講座の更新や、先生からの返信などを通知する機能)
+- 自動テストの追加 (特に購入と認証まわりのテストコードを充実させる)
+- ファイルの整理整頓
+
+### バックエンド部分の改善
+
+- 認証を二要素認証にする (Stripeで二段階認証か二要素認証を指定されているため)
+- Supabase テーブルのテーブル設計の見直し (分かりやすい名前、リレーションの追加など)
+- Supabase ストレージの構成の見直し (分かりやすい名前、ディレクトリ構成の見直しなど)
+- 自動テストの追加 (特にEdge Functionsのテストコードを充実させる)
+
+### その他
+
+- ドキュメントの整備 (Webサイトにアプリの使い方ページを作成)
+- モバイルストア用のスクリーンショットや動画の作成
+- ポスターやチラシなどの宣伝素材の作成
+- 美術ブログを開設して、アプリの開発過程や、デッサンのコツなどを発信していく
+- がんばる！
+
+<img src="/images/development/pineduck-art-mvp/drawing-duck.webp" alt="絵を描くアヒル" width="200" loading="lazy" />
