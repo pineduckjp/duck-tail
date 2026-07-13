@@ -14,9 +14,9 @@ main section {
   overflow: hidden;
 }
 
-main h2 {
+main h1 {
   margin: 15px 0;
-  font-size: 20px;
+  font-size: 30px;
 }
 
 main ul {
