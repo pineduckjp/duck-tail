@@ -71,7 +71,11 @@ const { prevUrl, nextUrl, breadcrumb } = Astro.props;
         const a = document.createElement("a");
         a.href = `#${subtitle.id}`;
         a.textContent = subtitle.textContent;
-        a.addEventListener("click", () => scrollToHash(subtitle.id));
+        a.addEventListener("click", (event) => {
+          event.preventDefault();
+          scrollToHash(subtitle.id);
+          closeMenu();
+        });
         li.appendChild(a);
         menuList.appendChild(li);
       });
@@ -82,12 +86,43 @@ const { prevUrl, nextUrl, breadcrumb } = Astro.props;
   // 履歴を残さずにページ内リンクで移動する
   function scrollToHash(id: string) {
     const target = document.getElementById(id);
-    if (target) {
-      // 履歴を残さずにURLのハッシュを変更
-      history.replaceState(null, "", `#${id}`);
-      // スムーズスクロールで移動
-      target.scrollIntoView({ behavior: "smooth" });
-    }
+    if (!target) return;
+
+    // 8フレーム分だけ追従してスクロールする
+    const HASH_FOLLOW_UP_FRAMES = 8;
+    // 1px以上の差があればスクロールする
+    const HASH_TOP_THRESHOLD = 1;
+
+    // 履歴を残さずにURLのハッシュを変更
+    history.replaceState(null, "", `#${id}`);
+
+    // mainがスクロールコンテナなので、mainに対して移動する
+    const jumpToTarget = () => {
+      const targetRect = target.getBoundingClientRect();
+      const mainRect = main.getBoundingClientRect();
+      const top = main.scrollTop + (targetRect.top - mainRect.top);
+      const nextTop = Math.max(0, top);
+      const changed = Math.abs(main.scrollTop - nextTop) > HASH_TOP_THRESHOLD;
+      if (changed) {
+        main.scrollTop = nextTop;
+      }
+      return changed;
+    };
+
+    // まず1回ジャンプ
+    jumpToTarget();
+
+    // lazy画像などでレイアウトが変わる可能性があるため再計算
+    let remainingFrames = HASH_FOLLOW_UP_FRAMES;
+    const followGrowth = () => {
+      jumpToTarget();
+      remainingFrames -= 1;
+      if (remainingFrames > 0) {
+        requestAnimationFrame(followGrowth);
+      }
+    };
+
+    requestAnimationFrame(followGrowth);
   }
 
   const openMenuButton = document.getElementById(

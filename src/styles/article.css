@@ -76,6 +76,22 @@ main img {
   image-rendering: pixelated;
 }
 
+main img.w-200 {
+  width: 200px;
+}
+
+main img.w-300 {
+  width: 300px;
+}
+
+main img.w-400 {
+  width: 400px;
+}
+
+main img.w-600 {
+  width: 600px;
+}
+
 main img.border {
   border: solid 1.5px var(--dark);
 }

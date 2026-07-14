@@ -2,8 +2,11 @@
 
 import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
+import { unified } from "@astrojs/markdown-remark";
 
 import favicons from "astro-favicons";
+
+import rehypeMarkdownImages from "./src/plugins/rehype-markdown-images.mjs";
 
 // https://astro.build/config
 export default defineConfig({
@@ -12,6 +15,9 @@ export default defineConfig({
     enabled: false,
   },
   markdown: {
+    processor: unified({
+      rehypePlugins: [rehypeMarkdownImages],
+    }),
     syntaxHighlight: {
       type: "shiki",
       excludeLangs: ["math"],

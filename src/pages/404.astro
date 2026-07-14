@@ -1,4 +1,5 @@
 ---
+import AutoImage from "@/components/AutoImage.astro";
 import Layout from "@/layouts/NotFoundLayout.astro";
 ---
 
@@ -22,7 +23,7 @@ import Layout from "@/layouts/NotFoundLayout.astro";
     { name: "ページが見つかりません", symbol: "article" },
   ]}
 >
-  <img
+  <AutoImage
     class="not-found-image"
     src="/images/not-found.webp"
     alt="ページが見つかりません"

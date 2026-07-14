@@ -9,12 +9,7 @@ heroImage: /images/pineduck/welcome-to-pineduck/hero.webp
 
 PineDuck（パインダック）は、アプリを通じて「ゲームのように気軽に始められて、自給自足生活を楽しく送れるようにすること」を目指すプロジェクトです。
 
-<img
-  src="/images/pineduck/welcome-to-pineduck/pineduck.webp"
-  alt="パインダック"
-  width="200px"
-  loading="lazy"
-/>
+![パインダック](/images/pineduck/welcome-to-pineduck/pineduck.webp){.w-200}
 
 ## 大草原の小さな家に憧れて
 
@@ -36,12 +31,7 @@ PineDuckは、自給自足生活を目指して活動を始めた私と共に成
 
 現在、開発を計画しているのは、8つのアプリと施設です。
 
-<img
-  src="/images/pineduck/welcome-to-pineduck/pineduck-apps.webp"
-  alt="PineDuckカフェのイメージ"
-  width="400px"
-  loading="lazy"
-/>
+![PineDuckカフェのイメージ](/images/pineduck/welcome-to-pineduck/pineduck-apps.webp){.w-400}
 
 ### PineDuckカフェ
 
@@ -98,12 +88,7 @@ PineDuckは、自給自足生活を目指して活動を始めた私と共に成
 
 PineDuckのキャラクターは、パイナップルを被ったアヒルの「パインダック」です。
 
-<img
-  src="/images/pineduck/welcome-to-pineduck/pineduck-stand.webp"
-  alt="パイナップルを被ったアヒルのキャラクター"
-  width="300px"
-  loading="lazy"
-/>
+![パイナップルを被ったアヒルのキャラクター](/images/pineduck/welcome-to-pineduck/pineduck-stand.webp){.w-300}
 
 アヒルのようにフラフラ歩きで、足取りはおぼつかないけれど、尖ったことにも挑戦していくぞ、という若手らしいデザインにしました。
 
@@ -119,9 +104,4 @@ PineDuckが目指すのは、効率的な生活ではなく、「心が満たさ
 
 もし「ちょっと面白そうだな」と興味を持っていただけたら、あなたの気が向いたときに、いつでもこの世界を覗きにきてください。いつでも、お待ちしています。
 
-<img
-  src="/images/pineduck/welcome-to-pineduck/waiting.webp"
-  alt="待ってるアヒル"
-  width="200px"
-  loading="lazy"
-/>
+![待ってるアヒル](/images/pineduck/welcome-to-pineduck/waiting.webp){.w-200}

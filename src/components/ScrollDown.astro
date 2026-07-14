@@ -22,28 +22,55 @@
 </style>
 
 <script>
-  const mainElement = document.querySelector("main") as HTMLElement;
-  const scrollDownButton = document.getElementById(
-    "scroll-down",
-  ) as HTMLButtonElement;
+  const main = document.querySelector("main") as HTMLElement;
+  const button = document.getElementById("scroll-down") as HTMLButtonElement;
 
-  // scrollDownButtonをクリックしたら、 main要素の最下部までスクロールする
-  function scrollToBottom() {
-    mainElement.scrollTo({
-      top: mainElement.scrollHeight,
-      behavior: "smooth",
-    });
-  }
-  scrollDownButton.addEventListener("click", scrollToBottom);
+  // 10px以内の差であれば最下部とみなす
+  const BOTTOM_THRESHOLD = 10;
+  // 24フレーム分だけ追従してスクロールする
+  const FOLLOW_UP_FRAMES = 24;
+  // 1px以上の差があればスクロールする
+  const BOTTOM_TOP_THRESHOLD = 1;
 
   // main要素のスクロール位置が最下部+10px~最下部に達したら、 scrollDownButtonを非表示にする
   function handleScroll() {
     const isAtBottom =
-      mainElement.scrollHeight - mainElement.scrollTop <=
-      mainElement.clientHeight + 10;
-    scrollDownButton.style.display = isAtBottom ? "none" : "block";
+      main.scrollHeight - main.scrollTop <=
+      main.clientHeight + BOTTOM_THRESHOLD;
+    button.style.display = isAtBottom ? "none" : "block";
   }
-  mainElement.addEventListener("scroll", handleScroll);
+
+  // スクロール位置を最下部に移動する
+  function scrollToBottom() {
+    // 最下部に移動
+    const jumpToBottom = () => {
+      const nextTop = Math.max(0, main.scrollHeight);
+      const changed = Math.abs(main.scrollTop - nextTop) > BOTTOM_TOP_THRESHOLD;
+      if (changed) {
+        main.scrollTop = nextTop;
+      }
+      return changed;
+    };
+
+    // まず1回移動
+    jumpToBottom();
+
+    // lazy画像などでレイアウトが変わる可能性があるため再計算
+    let remainingFrames = FOLLOW_UP_FRAMES;
+    const followGrowth = () => {
+      jumpToBottom();
+      remainingFrames -= 1;
+      if (remainingFrames > 0) {
+        requestAnimationFrame(followGrowth);
+      }
+    };
+
+    requestAnimationFrame(followGrowth);
+  }
+
+  button.addEventListener("click", scrollToBottom);
+  main.addEventListener("scroll", handleScroll);
+  main.addEventListener("load", handleScroll, true);
   window.addEventListener("DOMContentLoaded", handleScroll);
   window.addEventListener("resize", handleScroll);
 </script>
