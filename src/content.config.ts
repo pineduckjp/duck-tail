@@ -9,10 +9,8 @@ const tail = defineCollection({
     slug: z
       .string()
       .trim()
-      .min(1, { message: "Slug is required." })
-      .regex(/^(?!-)(?!.*--)(?!.*-$)[a-z0-9-]+$/, {
-        message:
-          "Slug must be lowercase and can only contain letters, numbers, and single hyphens (no leading/trailing hyphen).",
+      .regex(/^[a-z0-9-]+$/, {
+        message: "Slug must be lowercase alphanumeric with hyphens",
       }),
     title: z.string(),
     description: z.string(),

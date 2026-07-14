@@ -10,13 +10,13 @@ main section {
   width: 100%;
   max-width: 600px;
   padding: 0 15px;
-  margin: 0 auto 30px;
+  margin: 15px auto;
   overflow: hidden;
 }
 
-main h2 {
+main h1 {
   margin: 15px 0;
-  font-size: 20px;
+  font-size: 30px;
 }
 
 main ul {

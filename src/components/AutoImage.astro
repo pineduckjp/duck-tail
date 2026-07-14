@@ -1,0 +1,46 @@
+---
+import { getPublicImageSize } from "@/lib/image.ts";
+
+interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  loading?: "eager" | "lazy";
+  decoding?: "sync" | "async" | "auto";
+  width?: number | string;
+  height?: number | string;
+}
+
+const {
+  src,
+  alt = "",
+  class: className,
+  loading = "lazy",
+  decoding = "async",
+  width,
+  height,
+  ...rest
+} = Astro.props;
+
+let resolvedWidth = width;
+let resolvedHeight = height;
+
+if (!resolvedWidth || !resolvedHeight) {
+  const size = await getPublicImageSize(src);
+  if (size) {
+    resolvedWidth ??= size.width;
+    resolvedHeight ??= size.height;
+  }
+}
+---
+
+<img
+  src={src}
+  alt={alt}
+  class={className}
+  loading={loading}
+  decoding={decoding}
+  width={resolvedWidth}
+  height={resolvedHeight}
+  {...rest}
+/>

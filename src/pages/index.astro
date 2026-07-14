@@ -6,6 +6,7 @@ import {
   getAllCategories,
   getTailArticlePath,
 } from "@/lib/tail.ts";
+import AutoImage from "@/components/AutoImage.astro";
 
 import Layout from "@/layouts/AllArticleListLayout.astro";
 
@@ -44,8 +45,11 @@ const maxArticlesPerCategory = 10; // 最大表示件数
             .slice(0, maxArticlesPerCategory)
             .map((article) => (
               <li>
-                <a href={getTailArticlePath(article)}>
-                  <img src={article.data.heroImage} alt={article.data.title} />
+                <a href={`${getTailArticlePath(article)}?prev=%2F`}>
+                  <AutoImage
+                    src={article.data.heroImage}
+                    alt={article.data.title}
+                  />
                 </a>
               </li>
             ))}

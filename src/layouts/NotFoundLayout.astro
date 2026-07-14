@@ -1,0 +1,44 @@
+---
+import type { BreadcrumbTrail } from "@/types/breadcrumb.ts";
+
+import Head from "@/components/Head.astro";
+import Header from "@/components/Header.astro";
+import ScrollDown from "@/components/ScrollDown.astro";
+import Footer from "@/components/Footer.astro";
+
+import "@/styles/not-found.css";
+
+interface Props {
+  title: string;
+  description: string;
+  index?: boolean;
+  prevUrl: string;
+  nextUrl?: string;
+  breadcrumb?: BreadcrumbTrail;
+}
+
+const { title, description, index, prevUrl, nextUrl, breadcrumb } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <Head
+      title={title}
+      description={description}
+      index={index}
+      breadcrumb={breadcrumb}
+    />
+  </head>
+
+  <body ontouchstart="">
+    <Header />
+    <main>
+      <section>
+        <slot />
+      </section>
+      <ScrollDown />
+    </main>
+    <Footer prevUrl={prevUrl} nextUrl={nextUrl} breadcrumb={breadcrumb} />
+  </body>
+</html>

@@ -6,6 +6,7 @@ import {
   getAllCategories,
   getTailArticlePath,
 } from "@/lib/tail.ts";
+import AutoImage from "@/components/AutoImage.astro";
 
 import { SITE_TITLE } from "@/consts.ts";
 import Layout from "@/layouts/CategoryArticleListLayout.astro";
@@ -73,14 +74,14 @@ const nextUrl = page.url.next ? `/${category.id}/${nextPageNum}` : undefined;
   prevUrl={prevUrl}
   nextUrl={nextUrl}
 >
-  <h2>{category.name}の記事{page.url.prev ? ` - ${currentPage}` : ""}</h2>
+  <h1>{category.name}の記事{page.url.prev ? ` - ${currentPage}` : ""}</h1>
   <p>{category.description}</p>
   <ul class="article-container">
     {
       page.data.map((article) => (
         <li class="article-item">
           <a class="article-link" href={getTailArticlePath(article)}>
-            <img
+            <AutoImage
               src={article.data.heroImage}
               alt={article.data.title}
               class="article-hero-image"

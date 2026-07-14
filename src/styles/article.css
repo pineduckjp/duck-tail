@@ -1,0 +1,171 @@
+main {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+main section {
+  width: 100%;
+  max-width: 600px;
+  padding: 0 15px;
+  margin: 15px auto;
+  overflow: hidden;
+}
+
+main h1,
+main h2,
+main h3,
+main h4,
+main h5,
+main h6,
+main p {
+  margin: 15px 0;
+}
+
+main h1 {
+  font-size: 30px;
+}
+
+main h2 {
+  font-size: 25px;
+}
+
+main h3,
+main h4,
+main h5,
+main h6 {
+  font-size: 20px;
+  border-left: solid 2.5px var(--dark);
+}
+
+main h3 {
+  padding-left: 12px;
+}
+
+main h4 {
+  padding-left: 17px;
+  box-shadow:
+    inset 2.5px 0 0 var(--base),
+    inset 5px 0 0 var(--dark);
+}
+
+main h5 {
+  padding-left: 19.5px;
+  box-shadow:
+    inset 2.5px 0 0 var(--base),
+    inset 5px 0 0 var(--dark),
+    inset 7.5px 0 0 var(--base);
+}
+
+main h6 {
+  padding-left: 22px;
+  box-shadow:
+    inset 2.5px 0 0 var(--base),
+    inset 5px 0 0 var(--dark),
+    inset 7.5px 0 0 var(--base),
+    inset 10px 0 0 var(--dark);
+}
+
+main img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 25px auto;
+  image-rendering: pixelated;
+}
+
+main img.w-200 {
+  width: 200px;
+}
+
+main img.w-300 {
+  width: 300px;
+}
+
+main img.w-400 {
+  width: 400px;
+}
+
+main img.w-600 {
+  width: 600px;
+}
+
+main img.border {
+  border: solid 1.5px var(--dark);
+}
+
+main a {
+  color: var(--dark);
+  text-decoration: underline;
+}
+
+main a:hover {
+  text-decoration: none;
+}
+
+main ul {
+  flex: 1;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+main ul li {
+  margin: 5px 0;
+}
+
+main ul li::before {
+  margin-right: 4px;
+  content: "> ";
+}
+
+main ol {
+  padding: 0;
+  margin: 0;
+  list-style-position: inside;
+}
+
+main ol li {
+  margin: 5px 0;
+}
+
+main blockquote {
+  padding: 0 8px;
+  margin: 15px 0;
+  border: solid 2px var(--dark);
+}
+
+main pre {
+  padding: 12px;
+  margin: 15px 0;
+  overflow-x: auto;
+  border: solid 1.5px var(--dark);
+}
+
+main pre.astro-code {
+  background-color: var(--light) !important;
+  border: solid 1.5px var(--dark) !important;
+  border-radius: 0;
+}
+
+main code {
+  display: inline-block;
+  padding: 1px 6px;
+  margin: 3px;
+  font-size: 0.9em;
+  background: transparent;
+  background-color: var(--light);
+  border: solid 1.5px var(--dark);
+  border-radius: 0;
+}
+
+main pre code {
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  background-color: var(--light);
+  border: 0;
+}

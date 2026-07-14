@@ -1,7 +1,7 @@
 ---
 name: ✨ Feature Request
 about: 新機能の提案
-title: "[FEAT] "
+title: "feat: "
 labels: feat
 ---
 
