@@ -25,51 +25,70 @@ duck-tail/
 │       ├── fix.md
 │       └── feat.md
 ├── docs/
-|   ├── images/
-|   │   └── *.webp
-|   └── sprites.md
+│   ├── images/
+│   │   └── *.webp
+│   └── sprites.md
 ├── public/
-|   ├── favicon.svg
-|   ├── fonts/
-|   │   └── *.woff2
-|   ├── icons/
-|   │   └── *.webp
-|   ├── images/
+│   ├── favicon.svg
+│   ├── fonts/
+│   │   └── *.woff2
+│   ├── icons/
+│   │   └── *.webp
+│   ├── images/
 │   │   ├── **/*.webp
-|   │   └── *.webp
-|   └── sprites/
-|       └── symbol/
-|           ├── *.json
-|           └── *.webp
+│   │   └── *.jpg
+│   └── sprites/
+│       └── symbol/
+│           ├── *.json
+│           └── *.webp
 ├── scripts/
-|   └── aseprite-to-css.ts
+│   └── aseprite-to-css.ts
 ├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   │   ├── AllArticleListLayout.astro
-│   │   ├── CategoryArticleListLayout.astro
-│   │   ├── ArticleLayout.astro
-│   │   └── NotFoundLayout.astro
-│   ├── lib/
-│   │   └── tail.ts
-│   ├── pages/
-│   │   ├── [category]/
-│   │   │   └── [...page].astro
-│   │   ├── [slug].astro
-│   │   ├── 404.astro
-│   │   ├── index.astro
-│   │   └── rss.xml.js
-│   ├── styles/
-│   │   ├── all-article-list.css
-|   |   ├── article.css
-│   │   ├── category-article-list.css
-│   │   ├── footer.css
-│   │   ├── global.css
-│   │   ├── not-found.css
-│   │   └── sprites-symbols.css
-│   └── types/
-│       └── breadcrumb.ts
+│   ├── consts.ts
+│   ├── content.config.ts
+│   ├── components/
+│   │   ├── AutoImage.astro
+│   │   ├── Footer.astro
+│   │   ├── Head.astro
+│   │   ├── Header.astro
+│   │   └── ScrollDown.astro
+│   ├── content/
+│   │   ├── categories/
+│   │   │   └── categories.yaml
+│   │   └── tail/
+│   │       ├── markdown-style-guide.md
+│   │       ├── art/
+│   │       ├── development/
+│   │       ├── farm/
+│   │       ├── pineduck/
+│   │       └── poem/
+│   ├── layouts/
+│   │   ├── AllArticleListLayout.astro
+│   │   ├── ArticleLayout.astro
+│   │   ├── CategoryArticleListLayout.astro
+│   │   └── NotFoundLayout.astro
+│   ├── lib/
+│   │   ├── image.ts
+│   │   └── tail.ts
+│   ├── pages/
+│   │   ├── [category]/
+│   │   │   └── [...page].astro
+│   │   ├── [slug].astro
+│   │   ├── 404.astro
+│   │   ├── index.astro
+│   │   └── rss.xml.js
+│   ├── plugins/
+│   │   └── rehype-markdown-images.mjs
+│   ├── styles/
+│   │   ├── all-article-list.css
+│   │   ├── article.css
+│   │   ├── category-article-list.css
+│   │   ├── footer.css
+│   │   ├── global.css
+│   │   ├── not-found.css
+│   │   └── sprites-symbol.css
+│   └── types/
+│       └── breadcrumb.ts
 ├── .gitignore
 ├── .prettierrc.mjs
 ├── eslint.config.mjs
