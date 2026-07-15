@@ -8,7 +8,7 @@ import {
 } from "@/lib/tail.ts";
 import AutoImage from "@/components/AutoImage.astro";
 
-import { SITE_TITLE } from "@/consts.ts";
+import { SITE_TITLE, PINEDUCK_URL, LP_URL } from "@/consts.ts";
 import Layout from "@/layouts/CategoryArticleListLayout.astro";
 
 export const getStaticPaths = (async ({ paginate }) => {
@@ -58,16 +58,16 @@ const nextUrl = page.url.next ? `/${category.id}/${nextPageNum}` : undefined;
   title={pageTitle}
   description={pageDescription}
   breadcrumb={[
-    { name: "PineDuck", symbol: "pineduck", url: "https://pineduck.jp/" },
+    { name: "PineDuck", symbol: "pineduck", url: PINEDUCK_URL },
     {
       name: "アヒルのしっぽ",
       symbol: "duck-tail",
-      url: "https://pineduck.jp/duck-tail/",
+      url: LP_URL,
     },
     {
       name: "すべての記事",
       symbol: "all",
-      url: "https://duck-tail.pineduck.jp/",
+      url: "/",
     },
     { name: category.name + "の記事", symbol: "category" },
   ]}
