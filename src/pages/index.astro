@@ -1,5 +1,10 @@
 ---
-import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts.ts";
+import {
+  SITE_TITLE,
+  SITE_DESCRIPTION,
+  PINEDUCK_URL,
+  LP_URL,
+} from "@/consts.ts";
 
 import {
   getAllArticles,
@@ -21,15 +26,15 @@ const maxArticlesPerCategory = 10; // 最大表示件数
   description={SITE_DESCRIPTION}
   index={true}
   breadcrumb={[
-    { name: "PineDuck", symbol: "pineduck", url: "https://pineduck.jp/" },
+    { name: "PineDuck", symbol: "pineduck", url: PINEDUCK_URL },
     {
       name: "アヒルのしっぽ",
       symbol: "duck-tail",
-      url: "https://pineduck.jp/duck-tail/",
+      url: LP_URL,
     },
     { name: "すべての記事", symbol: "all" },
   ]}
-  prevUrl="https://pineduck.jp/duck-tail/"
+  prevUrl={LP_URL}
 >
   {
     allCategories.map((category) => (

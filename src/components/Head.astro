@@ -63,3 +63,12 @@ const canonical = canonicalUrl
 
 {/* astro-favicons から生成されたアイコンとマニフェストタグのみ挿入 */}
 <Fragment set:html={favicons()} />
+
+{/* フォントのプリロード */}
+<link
+  rel="preload"
+  as="font"
+  type="font/woff2"
+  href="/fonts/JF-Dot-Shinonome-16-Subset.woff2"
+  crossorigin
+/>
