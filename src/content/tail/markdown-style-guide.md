@@ -4,6 +4,7 @@ title: "Markdown Style Guide"
 description: "Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro."
 pubDate: "Jun 19 2024"
 heroImage: "/images/blog-placeholder-1.jpg"
+published: false
 ---
 
 Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.
@@ -13,222 +14,219 @@ Here is a sample of some basic Markdown syntax that can be used when writing Mar
 The following HTML `<h1>`—`<h6>` elements represent six levels of section headings. `<h1>` is the highest section level
 while `<h6>` is the lowest.
 
-        # H1
+# H1
 
-        ## H2
+## H2
 
-        ### H3
+### H3
 
-        #### H4
+#### H4
 
-        ##### H5
+##### H5
 
-        ###### H6
+###### H6
 
-        ## Paragraph
+## Paragraph
 
-        Xerum, quo qui aut unt expliquam qui dolut labo. Aque venitatiusda cum, voluptionse latur sitiae dolessi aut
-        parist aut dollo enim qui voluptate ma dolestendit peritin re plis aut quas inctum laceat est volestemque
-        commosa as cus endigna tectur, offic to cor sequas etum rerum idem sintibus eiur? Quianimin porecus evelectur,
-        cum que nis nust voloribus ratem aut omnimi, sitatur? Quiatem. Nam, omnis sum am facea corem alique molestrunt
-        et eos evelece arcillit ut aut eos eos nus, sin conecerem erum fuga. Ri oditatquam, ad quibus unda veliamenimin
-        cusam et facea ipsamus es exerum sitate dolores editium rerore eost, temped molorro ratiae volorro te reribus
-        dolorer sperchicium faceata tiustia prat.
+Xerum, quo qui aut unt expliquam qui dolut labo. Aque venitatiusda cum, voluptionse latur sitiae dolessi aut
+parist aut dollo enim qui voluptate ma dolestendit peritin re plis aut quas inctum laceat est volestemque
+commosa as cus endigna tectur, offic to cor sequas etum rerum idem sintibus eiur? Quianimin porecus evelectur,
+cum que nis nust voloribus ratem aut omnimi, sitatur? Quiatem. Nam, omnis sum am facea corem alique molestrunt
+et eos evelece arcillit ut aut eos eos nus, sin conecerem erum fuga. Ri oditatquam, ad quibus unda veliamenimin
+cusam et facea ipsamus es exerum sitate dolores editium rerore eost, temped molorro ratiae volorro te reribus
+dolorer sperchicium faceata tiustia prat.
 
-        Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sapicia is sinveli squiatum, core
-        et que aut hariosam ex eat.
+Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sapicia is sinveli squiatum, core
+et que aut hariosam ex eat.
 
-        ## Images
+## Images
 
-        ### Syntax
+### Syntax
 
-        ```markdown
-        ![Alt text](./full/or/relative/path/of/image)
-        ```
+```markdown
+![Alt text](./full/or/relative/path/of/image)
+```
 
-        ### Output
+### Output
 
-        ![blog placeholder](../assets/blog-placeholder-about.jpg)
+![blog placeholder](/images/blog-placeholder-1.jpg)
 
-        ## Blockquotes
+## Blockquotes
 
-        The blockquote element represents content that is quoted from another source, optionally with a citation which
-        must be within a `footer` or `cite` element, and optionally with in-line changes such as annotations and
-        abbreviations.
+The blockquote element represents content that is quoted from another source, optionally with a citation which
+must be within a `footer` or `cite` element, and optionally with in-line changes such as annotations and
+abbreviations.
 
-        ### Blockquote without attribution
+### Blockquote without attribution
 
-        #### Syntax
+#### Syntax
 
-        ```markdown
-        > Tiam, ad mint andaepu dandae nostion secatur sequo quae.
-        > **Note** that you can use _Markdown syntax_ within a blockquote.
-        ```
+```markdown
+> Tiam, ad mint andaepu dandae nostion secatur sequo quae.
+> **Note** that you can use _Markdown syntax_ within a blockquote.
+```
 
-        #### Output
+#### Output
 
-        > Tiam, ad mint andaepu dandae nostion secatur sequo quae.
-        > **Note** that you can use _Markdown syntax_ within a blockquote.
+> Tiam, ad mint andaepu dandae nostion secatur sequo quae.
+> **Note** that you can use _Markdown syntax_ within a blockquote.
 
-        ### Blockquote with attribution
+### Blockquote with attribution
 
-        #### Syntax
+#### Syntax
 
-        ```markdown
-        > Don't communicate by sharing memory, share memory by communicating.<br>
-        > — <cite>Rob Pike[^1]</cite>
-        ```
+```markdown
+> Don't communicate by sharing memory, share memory by communicating.<br>
+> — <cite>Rob Pike[^1]</cite>
+```
 
-        #### Output
+#### Output
 
-        > Don't communicate by sharing memory, share memory by communicating.<br>
-        > — <cite>Rob Pike[^1]</cite>
+> Don't communicate by sharing memory, share memory by communicating.<br>
+> — <cite>Rob Pike[^1]</cite>
 
-        [^1]: The above quote is excerpted from Rob Pike's [talk](https://www.youtube.com/watch?v=PAAkCSZUG1c) during
-        Gopherfest, November 18, 2015.
+[^1]:
+    The above quote is excerpted from Rob Pike's [talk](https://www.youtube.com/watch?v=PAAkCSZUG1c) during
+    Gopherfest, November 18, 2015.
 
-        ## Tables
+## Tables
 
-        ### Syntax
+### Syntax
 
-        ```markdown
-        | Italics | Bold | Code |
-        | --------- | -------- | ------ |
-        | _italics_ | **bold** | `code` |
-        ```
+```markdown
+| Italics   | Bold     | Code   |
+| --------- | -------- | ------ |
+| _italics_ | **bold** | `code` |
+```
 
-        ### Output
+### Output
 
-        | Italics | Bold | Code |
-        | --------- | -------- | ------ |
-        | _italics_ | **bold** | `code` |
+| Italics   | Bold     | Code   |
+| --------- | -------- | ------ |
+| _italics_ | **bold** | `code` |
 
-        ## Code Blocks
+## Code Blocks
 
-        ### Syntax
+### Syntax
 
-        we can use 3 backticks ``` in new line and write snippet and close with 3 backticks on new line and to highlight
-        language specific syntax, write one word of language name after first 3 backticks, for eg. html, javascript,
-        css, markdown, typescript, txt, bash
+we can use 3 backticks ``` in new line and write snippet and close with 3 backticks on new line and to highlight
+language specific syntax, write one word of language name after first 3 backticks, for eg. html, javascript,
+css, markdown, typescript, txt, bash
 
-        ````markdown
-        ```html
-        <!doctype html>
-        <html lang="en">
+````markdown
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Example HTML5 Document</title>
+  </head>
 
-        <head>
-          <meta charset="utf-8" />
-          <title>Example HTML5 Document</title>
-        </head>
+  <body>
+    <p>Test</p>
+  </body>
+</html>
+```
+````
 
-        <body>
-          <p>Test</p>
-        </body>
+### Output
 
-        </html>
-        ```
-        ````
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Example HTML5 Document</title>
+  </head>
 
-        ### Output
+  <body>
+    <p>Test</p>
+  </body>
+</html>
+```
 
-        ```html
-        <!doctype html>
-        <html lang="en">
+## List Types
 
-        <head>
-          <meta charset="utf-8" />
-          <title>Example HTML5 Document</title>
-        </head>
+### Ordered List
 
-        <body>
-          <p>Test</p>
-        </body>
+#### Syntax
 
-        </html>
-        ```
+```markdown
+1. First item
+2. Second item
+3. Third item
+```
 
-        ## List Types
+#### Output
 
-        ### Ordered List
+1. First item
+2. Second item
+3. Third item
 
-        #### Syntax
+### Unordered List
 
-        ```markdown
-        1. First item
-        2. Second item
-        3. Third item
-        ```
+#### Syntax
 
-        #### Output
+```markdown
+- List item
+- Another item
+- And another item
+```
 
-        1. First item
-        2. Second item
-        3. Third item
+#### Output
 
-        ### Unordered List
+- List item
+- Another item
+- And another item
 
-        #### Syntax
+### Nested list
 
-        ```markdown
-        - List item
-        - Another item
-        - And another item
-        ```
+#### Syntax
 
-        #### Output
+```markdown
+- Fruit
+- Apple
+- Orange
+- Banana
+- Dairy
+- Milk
+- Cheese
+```
 
-        - List item
-        - Another item
-        - And another item
+#### Output
 
-        ### Nested list
+- Fruit
+- Apple
+- Orange
+- Banana
+- Dairy
+- Milk
+- Cheese
 
-        #### Syntax
+## Other Elements — abbr, sub, sup, kbd, mark
 
-        ```markdown
-        - Fruit
-        - Apple
-        - Orange
-        - Banana
-        - Dairy
-        - Milk
-        - Cheese
-        ```
+### Syntax
 
-        #### Output
+```markdown
+<abbr title="Graphics Interchange Format">GIF</abbr> is a bitmap image format.
 
-        - Fruit
-        - Apple
-        - Orange
-        - Banana
-        - Dairy
-        - Milk
-        - Cheese
+H<sub>2</sub>O
 
-        ## Other Elements — abbr, sub, sup, kbd, mark
+X<sup>n</sup> + Y<sup>n</sup> = Z<sup>n</sup>
 
-        ### Syntax
+Press <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>Delete</kbd> to end the session.
 
-        ```markdown
-        <abbr title="Graphics Interchange Format">GIF</abbr> is a bitmap image format.
+Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.
+```
 
-        H<sub>2</sub>O
+### Output
 
-        X<sup>n</sup> + Y<sup>n</sup> = Z<sup>n</sup>
+<abbr title="Graphics Interchange Format">GIF</abbr> is a bitmap image format.
 
-        Press <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>Delete</kbd> to end the session.
+H<sub>2</sub>O
 
-        Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.
-        ```
+X<sup>n</sup> + Y<sup>n</sup> = Z<sup>n</sup>
 
-        ### Output
+Press <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>Delete</kbd> to end the session.
 
-        <abbr title="Graphics Interchange Format">GIF</abbr> is a bitmap image format.
-
-        H<sub>2</sub>O
-
-        X<sup>n</sup> + Y<sup>n</sup> = Z<sup>n</sup>
-
-        Press <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>Delete</kbd> to end the session.
-
-        Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.
+Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.

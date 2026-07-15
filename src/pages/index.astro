@@ -1,11 +1,17 @@
 ---
-import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts.ts";
+import {
+  SITE_TITLE,
+  SITE_DESCRIPTION,
+  PINEDUCK_URL,
+  LP_URL,
+} from "@/consts.ts";
 
 import {
   getAllArticles,
   getAllCategories,
   getTailArticlePath,
 } from "@/lib/tail.ts";
+import AutoImage from "@/components/AutoImage.astro";
 
 import Layout from "@/layouts/AllArticleListLayout.astro";
 
@@ -20,15 +26,15 @@ const maxArticlesPerCategory = 10; // 最大表示件数
   description={SITE_DESCRIPTION}
   index={true}
   breadcrumb={[
-    { name: "PineDuck", symbol: "pineduck", url: "https://pineduck.jp/" },
+    { name: "PineDuck", symbol: "pineduck", url: PINEDUCK_URL },
     {
       name: "アヒルのしっぽ",
       symbol: "duck-tail",
-      url: "https://pineduck.jp/duck-tail/",
+      url: LP_URL,
     },
     { name: "すべての記事", symbol: "all" },
   ]}
-  prevUrl="https://pineduck.jp/duck-tail/"
+  prevUrl={LP_URL}
 >
   {
     allCategories.map((category) => (
@@ -44,8 +50,11 @@ const maxArticlesPerCategory = 10; // 最大表示件数
             .slice(0, maxArticlesPerCategory)
             .map((article) => (
               <li>
-                <a href={getTailArticlePath(article)}>
-                  <img src={article.data.heroImage} alt={article.data.title} />
+                <a href={`${getTailArticlePath(article)}?prev=%2F`}>
+                  <AutoImage
+                    src={article.data.heroImage}
+                    alt={article.data.title}
+                  />
                 </a>
               </li>
             ))}

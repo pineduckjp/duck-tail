@@ -17,55 +17,78 @@
 duck-tail/
 ├── .github/
 │   ├── pull_request_template.md
-│   ├── workflows/ -> 後で追加します。
-│   │   ├── test.yml -> 後で追加します。
-│   │   ├── deploy-preview.yml -> 後で追加します。
-│   │   └── deploy-production.yml -> 後で追加します。
+│   ├── workflows/
+│   │   ├── test.yml
+│   │   ├── deploy-preview.yml
+│   │   └── deploy-production.yml
 │   └── ISSUE_TEMPLATE/
 │       ├── fix.md
 │       └── feat.md
 ├── docs/
-|   ├── images/
-|   │   └── *.webp
-|   └── sprites.md
+│   ├── images/
+│   │   └── *.webp
+│   └── sprites.md
 ├── public/
-|   ├── .assetsignore -> 後で追加します。
-|   ├── favicon.svg
-|   ├── fonts/
-|   │   └── *.woff2
-|   ├── icons/
-|   │   └── *.webp
-|   ├── images/
-|   │   └── *.webp
-|   └── sprites/
-|       └── symbol/
-|           ├── *.json
-|           └── *.webp
+│   ├── favicon.svg
+│   ├── fonts/
+│   │   └── *.woff2
+│   ├── icons/
+│   │   └── *.webp
+│   ├── images/
+│   │   ├── **/*.webp
+│   │   └── *.jpg
+│   └── sprites/
+│       └── symbol/
+│           ├── *.json
+│           └── *.webp
 ├── scripts/
-|   └── aseprite-to-css.ts
+│   └── aseprite-to-css.ts
 ├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   │   ├── AllArticleListLayout.astro
-│   │   ├── CategoryArticleListLayout.astro
-│   │   └── ArticleLayout.astro -> 後で追加します。
-│   ├── lib/
-│   │   └── tail.ts
-│   ├── pages/
-│   │   ├── [category]/
-│   │   │   └── [...page].astro
-│   │   ├── index.astro
-│   │   └── rss.xml.js
-│   ├── styles/
-│   │   ├── all-article-list.css
-|   |   ├── article.css -> 後で追加します。
-│   │   ├── category-article-list.css
-│   │   ├── footer.css
-│   │   ├── global.css
-│   │   └── sprites-symbols.css
-│   └── types/
-│       └── breadcrumb.ts
+│   ├── consts.ts
+│   ├── content.config.ts
+│   ├── components/
+│   │   ├── AutoImage.astro
+│   │   ├── Footer.astro
+│   │   ├── Head.astro
+│   │   ├── Header.astro
+│   │   └── ScrollDown.astro
+│   ├── content/
+│   │   ├── categories/
+│   │   │   └── categories.yaml
+│   │   └── tail/
+│   │       ├── markdown-style-guide.md
+│   │       ├── art/
+│   │       ├── development/
+│   │       ├── farm/
+│   │       ├── pineduck/
+│   │       └── poem/
+│   ├── layouts/
+│   │   ├── AllArticleListLayout.astro
+│   │   ├── ArticleLayout.astro
+│   │   ├── CategoryArticleListLayout.astro
+│   │   └── NotFoundLayout.astro
+│   ├── lib/
+│   │   ├── image.ts
+│   │   └── tail.ts
+│   ├── pages/
+│   │   ├── [category]/
+│   │   │   └── [...page].astro
+│   │   ├── [slug].astro
+│   │   ├── 404.astro
+│   │   ├── index.astro
+│   │   └── rss.xml.js
+│   ├── plugins/
+│   │   └── rehype-markdown-images.mjs
+│   ├── styles/
+│   │   ├── all-article-list.css
+│   │   ├── article.css
+│   │   ├── category-article-list.css
+│   │   ├── footer.css
+│   │   ├── global.css
+│   │   ├── not-found.css
+│   │   └── sprites-symbol.css
+│   └── types/
+│       └── breadcrumb.ts
 ├── .gitignore
 ├── .prettierrc.mjs
 ├── eslint.config.mjs
@@ -75,7 +98,7 @@ duck-tail/
 ├── CONTRIBUTING.md
 ├── package.json
 ├── tsconfig.json
-└── wrangler.jsonc -> 後で追加します。
+└── wrangler.jsonc
 ```
 
 ### レイアウト
@@ -127,6 +150,12 @@ npm run build
 # デプロイ前確認
 npm run preview
 ```
+
+### CI / CD
+
+- develop 向け PR 作成時に GitHub Actions の `test.yml` が `npm run check` を実行します。
+- develop へマージされると `deploy-preview.yml` が `npm run build` の成果物を使って `npx wrangler versions upload` を実行します。
+- main へマージされると `deploy-production.yml` が `npm run build` の成果物を使って本番デプロイを実行します。
 
 ## コマンド
 

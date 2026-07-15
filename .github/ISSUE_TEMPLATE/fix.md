@@ -1,7 +1,7 @@
 ---
 name: 🐛 Bug Report
 about: アプリケーションの不具合を報告
-title: "[FIX] "
+title: "fix: "
 labels: fix
 ---
 

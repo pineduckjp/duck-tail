@@ -13,7 +13,9 @@ const { prevUrl, nextUrl, breadcrumb } = Astro.props;
 ---
 
 <footer>
-  <a id="prev" class="footer-button" href={prevUrl}>&lt;&lt; 戻る</a>
+  <button id="prev" class="footer-button" data-url={prevUrl}
+    >&lt;&lt; 戻る</button
+  >
   <button id="open-menu" class="footer-button" aria-label="メニューを開く">
     <span data-sprite="menu"></span>
     メニュー
@@ -21,10 +23,8 @@ const { prevUrl, nextUrl, breadcrumb } = Astro.props;
   <button id="close-menu" class="footer-button" aria-label="メニューを閉じる">
     × 閉じる
   </button>
-  <a
-    id="next"
-    class={nextUrl ? "footer-button" : "footer-button disabled"}
-    href={nextUrl ? nextUrl : ""}>&gt;&gt; 進む</a
+  <button id="next" class="footer-button" data-url={nextUrl} disabled={!nextUrl}
+    >&gt;&gt; 進む</button
   >
 </footer>
 
@@ -57,35 +57,72 @@ const { prevUrl, nextUrl, breadcrumb } = Astro.props;
   const main = document.querySelector("main") as HTMLElement;
 
   // サブタイトルを取得してメニューに表示
-  function getSubTitle() {
-    const h2 = main.querySelectorAll("h2") as NodeListOf<HTMLHeadingElement>;
+  function getHeadings() {
+    const headings = main.querySelectorAll(
+      "h1, h2",
+    ) as NodeListOf<HTMLHeadingElement>;
     const menuList = document.getElementById("menu-list") as HTMLUListElement;
-    if (h2.length > 0) {
+    if (headings.length > 0) {
       // サブタイトルがある場合はメニューに追加
-      h2.forEach((subtitle, index) => {
+      headings.forEach((subtitle, index) => {
         const li = document.createElement("li");
         // サブタイトルにidを付与
         subtitle.id = `${index}`;
         const a = document.createElement("a");
         a.href = `#${subtitle.id}`;
         a.textContent = subtitle.textContent;
-        a.addEventListener("click", () => scrollToHash(subtitle.id));
+        a.addEventListener("click", (event) => {
+          event.preventDefault();
+          scrollToHash(subtitle.id);
+          closeMenu();
+        });
         li.appendChild(a);
         menuList.appendChild(li);
       });
     }
   }
-  window.addEventListener("DOMContentLoaded", getSubTitle);
+  window.addEventListener("DOMContentLoaded", getHeadings);
 
   // 履歴を残さずにページ内リンクで移動する
   function scrollToHash(id: string) {
     const target = document.getElementById(id);
-    if (target) {
-      // 履歴を残さずにURLのハッシュを変更
-      history.replaceState(null, "", `#${id}`);
-      // スムーズスクロールで移動
-      target.scrollIntoView({ behavior: "smooth" });
-    }
+    if (!target) return;
+
+    // 8フレーム分だけ追従してスクロールする
+    const HASH_FOLLOW_UP_FRAMES = 8;
+    // 1px以上の差があればスクロールする
+    const HASH_TOP_THRESHOLD = 1;
+
+    // 履歴を残さずにURLのハッシュを変更
+    history.replaceState(null, "", `#${id}`);
+
+    // mainがスクロールコンテナなので、mainに対して移動する
+    const jumpToTarget = () => {
+      const targetRect = target.getBoundingClientRect();
+      const mainRect = main.getBoundingClientRect();
+      const top = main.scrollTop + (targetRect.top - mainRect.top);
+      const nextTop = Math.max(0, top);
+      const changed = Math.abs(main.scrollTop - nextTop) > HASH_TOP_THRESHOLD;
+      if (changed) {
+        main.scrollTop = nextTop;
+      }
+      return changed;
+    };
+
+    // まず1回ジャンプ
+    jumpToTarget();
+
+    // lazy画像などでレイアウトが変わる可能性があるため再計算
+    let remainingFrames = HASH_FOLLOW_UP_FRAMES;
+    const followGrowth = () => {
+      jumpToTarget();
+      remainingFrames -= 1;
+      if (remainingFrames > 0) {
+        requestAnimationFrame(followGrowth);
+      }
+    };
+
+    requestAnimationFrame(followGrowth);
   }
 
   const openMenuButton = document.getElementById(
@@ -125,4 +162,60 @@ const { prevUrl, nextUrl, breadcrumb } = Astro.props;
       closeMenu();
     }
   }
+
+  // 同一オリジンのURLのみ許可
+  function getSafeNavigationUrl(raw: string | undefined): string | null {
+    if (!raw) return null;
+
+    try {
+      // 相対URLも絶対URLも解決できる
+      const url = new URL(raw, window.location.href);
+
+      // http/https 以外は拒否
+      if (url.protocol !== "http:" && url.protocol !== "https:") return null;
+
+      // 同一オリジンは相対化して返す
+      if (url.origin === window.location.origin) {
+        return `${url.pathname}${url.search}${url.hash}`;
+      }
+
+      // pineduck.jp とそのサブドメインを許可
+      if (
+        url.hostname === "pineduck.jp" ||
+        url.hostname.endsWith(".pineduck.jp")
+      ) {
+        // 許可済みの別サブドメインは絶対URLのまま返す
+        return url.toString();
+      }
+
+      return null;
+    } catch {
+      return null;
+    }
+  }
+
+  // 戻るボタンのクリックイベント
+  // クエリパラメーターでURLが指定されていなければdata-url属性に指定されたURLに遷移する、指定されていれば指定URLに遷移する
+  const prevButton = document.getElementById("prev") as HTMLButtonElement;
+  function goPrev() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const prevUrl = urlParams.get("prev") || prevButton.dataset.url;
+    const safePrevUrl = getSafeNavigationUrl(prevUrl);
+    if (safePrevUrl) {
+      window.location.href = safePrevUrl;
+    }
+  }
+  prevButton.addEventListener("click", goPrev);
+
+  // 進むボタンのクリックイベント
+  const nextButton = document.getElementById("next") as HTMLButtonElement;
+  function goNext() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const nextUrl = urlParams.get("next") || nextButton.dataset.url;
+    const safeNextUrl = getSafeNavigationUrl(nextUrl);
+    if (safeNextUrl) {
+      window.location.href = safeNextUrl;
+    }
+  }
+  nextButton.addEventListener("click", goNext);
 </script>

@@ -25,20 +25,9 @@ export async function getAllCategories(
   return sortedCategories.filter((c) => usedCategoryIds.has(c.id));
 }
 
-// カテゴリごとに記事をグループ化
-export function groupArticlesByCategory(
-  articles: TailArticle[],
-): Map<string, TailArticle[]> {
-  const map = new Map<string, TailArticle[]>();
-
-  for (const article of articles) {
-    const categoryId = article.data.category.id;
-    const list = map.get(categoryId) ?? [];
-    list.push(article);
-    map.set(categoryId, list);
-  }
-
-  return map;
+// 記事のURLを取得
+export function getTailArticlePath(article: TailArticle): string {
+  return "/" + article.data.slug + "/";
 }
 
 // slugの重複をチェック
@@ -67,7 +56,22 @@ ${detail}
 ------`);
 }
 
-// 記事のURLを取得
-export function getTailArticlePath(article: TailArticle): string {
-  return "/" + article.data.slug + "/";
+// slugとカテゴリーIDの衝突をチェック
+export function checkSlugCategoryConflicts(
+  articles: TailArticle[],
+  categories: TailCategory[],
+): void {
+  const categoryIds = new Set(categories.map((category) => category.id));
+  const conflicts = articles
+    .filter((article) => categoryIds.has(article.data.slug))
+    .map((article) => article.data.slug);
+  if (conflicts.length === 0) return;
+
+  const detail = conflicts.map((slug) => "- " + slug).join("\n");
+  throw new Error(
+    `記事slugとカテゴリーIDが衝突しています。以下の値は /slug/ と /category/ で競合します。
+------
+${detail}
+------`,
+  );
 }

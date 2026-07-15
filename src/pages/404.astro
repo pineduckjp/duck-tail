@@ -1,0 +1,40 @@
+---
+import AutoImage from "@/components/AutoImage.astro";
+import Layout from "@/layouts/NotFoundLayout.astro";
+
+import { SITE_TITLE, PINEDUCK_URL, LP_URL } from "@/consts.ts";
+---
+
+<Layout
+  title={`ページが見つかりません | ${SITE_TITLE}`}
+  description="お探しのページは見つかりませんでした。URLが間違っているか、ページが削除された可能性があります。"
+  index={false}
+  prevUrl="/"
+  breadcrumb={[
+    { name: "PineDuck", symbol: "pineduck", url: PINEDUCK_URL },
+    {
+      name: "アヒルのしっぽ",
+      symbol: "duck-tail",
+      url: LP_URL,
+    },
+    {
+      name: "すべての記事",
+      symbol: "all",
+      url: "/",
+    },
+    { name: "ページが見つかりません", symbol: "article" },
+  ]}
+>
+  <AutoImage
+    class="not-found-image"
+    src="/images/not-found.webp"
+    alt="ページが見つかりません"
+  />
+  <h1>ページが見つかりません</h1>
+  <p>
+    お探しのページは見つかりませんでした。URLが間違っているか、ページが削除された可能性があります。
+  </p>
+  <a class="return-root" href="/"
+    ><span data-sprite="all"></span><span>すべての記事へ</span></a
+  >
+</Layout>
